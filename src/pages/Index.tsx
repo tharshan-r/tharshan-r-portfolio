@@ -31,6 +31,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background grid-bg">
       <ScrollProgress />
+      <EngineeringToggle />
       <Navbar />
       <HeroSection />
       <SectionReveal><MetricsSection /></SectionReveal>

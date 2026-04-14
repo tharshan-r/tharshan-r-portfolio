@@ -1,6 +1,7 @@
 import React from 'react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from '@/hooks/use-theme'
+import { EngineeringModeProvider } from '@/hooks/use-engineering-mode'
 import { Toaster } from '@/components/ui/sonner'
 import { ErrorBoundaryProvider } from './providers/ErrorBoundaryProvider'
 import { queryClient } from './providers/QueryProvider'
@@ -12,8 +13,10 @@ function App() {
     <ErrorBoundaryProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
-          <AppRouter />
-          <Toaster />
+          <EngineeringModeProvider>
+            <AppRouter />
+            <Toaster />
+          </EngineeringModeProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </ErrorBoundaryProvider>
