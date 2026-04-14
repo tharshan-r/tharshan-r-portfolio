@@ -30,10 +30,7 @@ const EngineeringToggle = () => {
       >
         <motion.div
           initial={false}
-          animate={{
-            x: engineeringMode ? 0 : 0,
-            rotate: engineeringMode ? 0 : 0,
-          }}
+          animate={{}}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
         >
           {engineeringMode ? (
@@ -52,6 +49,7 @@ const EngineeringToggle = () => {
           >
             ENG
           </motion.span>
+
           <motion.span
             initial={false}
             animate={{ y: engineeringMode ? 16 : 0 }}
@@ -73,7 +71,7 @@ const EngineeringToggle = () => {
         />
       </button>
 
-      {/* Learning tooltip */}
+      {/* TOOLTIP */}
       <AnimatePresence>
         {showTooltip && (
           <motion.div
@@ -98,24 +96,31 @@ const EngineeringToggle = () => {
                 <div className="mt-0.5 flex-shrink-0 w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center">
                   <Code2 size={12} className="text-primary" />
                 </div>
+
                 <div>
                   <p className="text-xs font-semibold text-foreground mb-1">
-                    Try Engineering Mode
+                    Explore Engineering Mode
                   </p>
+
                   <p className="text-[11px] leading-relaxed text-muted-foreground">
-                    Switch between <span className="text-foreground font-medium">Design</span> and <span className="text-primary font-medium">Engineering</span> views to explore technical depth behind each section.
+                    Switch to{" "}
+                    <span className="text-primary font-medium">
+                      Engineering Mode
+                    </span>{" "}
+                    to see how systems are designed — including architecture,
+                    performance decisions, and real-world tradeoffs.
                   </p>
                 </div>
               </div>
 
-              {/* Pulsing indicator */}
+              {/* subtle indicator */}
               <motion.div
                 animate={{ opacity: [0.5, 1, 0.5] }}
                 transition={{ repeat: Infinity, duration: 2 }}
                 className="mt-2 flex items-center gap-1.5 text-[10px] text-primary/70 font-mono"
               >
                 <span className="w-1 h-1 rounded-full bg-primary" />
-                Click to toggle
+                Toggle to explore
               </motion.div>
             </div>
           </motion.div>

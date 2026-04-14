@@ -12,11 +12,8 @@ import MetricsSection from '@/features/portfolio/MetricsSection'
 import ContactSection from '@/features/portfolio/ContactSection'
 import Footer from '@/features/portfolio/Footer'
 import Navbar from '@/features/portfolio/Navbar'
-import NetworkBackground from '@/features/portfolio/NetworkBackground'
 import ScrollProgress from '@/features/portfolio/ScrollProgress'
 import SectionReveal from '@/features/portfolio/SectionReveal'
-import ThemeToggle from '@/features/portfolio/ThemeToggle'
-import EngineeringToggle from '@/features/portfolio/EngineeringToggle'
 
 const Index = () => {
   const location = useLocation();
@@ -31,7 +28,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background grid-bg">
       <ScrollProgress />
-      <EngineeringToggle />
       <Navbar />
       <HeroSection />
       <SectionReveal><MetricsSection /></SectionReveal>

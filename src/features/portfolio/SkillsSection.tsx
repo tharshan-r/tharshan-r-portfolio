@@ -18,142 +18,140 @@ interface SkillGroup {
   description: string;
   skills: Skill[];
 }
-
 const skillGroups: SkillGroup[] = [
   {
     title: "Frontend Engineering",
-    description: "Core technologies for building modern web applications",
+    description: "Building scalable, production-grade web applications",
     skills: [
       {
         name: "React",
         icon: Code2,
         capabilities: [
-          "Hooks architecture",
-          "Component composition",
-          "State and props management",
-          "Performance optimization (React.memo, useMemo, useCallback)",
-          "Error boundaries",
+          "Component-driven architecture for scalable UI systems",
+          "Custom hooks for reusable business logic",
+          "Optimized rendering using memoization techniques",
+          "Error boundaries and resilience patterns",
+          "Handling complex state flows in large applications",
         ],
       },
       {
         name: "Next.js",
         icon: Globe,
         capabilities: [
-          "Server-Side Rendering (SSR)",
-          "Incremental Static Regeneration (ISR)",
-          "File-based routing",
-          "API routes",
-          "Middleware",
-          "Image optimization",
+          "Server-Side Rendering (SSR) for performance and SEO",
+          "Incremental Static Regeneration (ISR) for scalable pages",
+          "File-based routing and middleware usage",
+          "API routes for backend integration",
+          "Image optimization and performance tuning",
         ],
       },
       {
         name: "TypeScript",
         icon: FileCode,
         capabilities: [
-          "Type-safe component development",
-          "Generics and utility types",
-          "Strict type checking",
-          "API response typing",
-          "Reusable type definitions",
+          "Type-safe application architecture",
+          "Advanced types (generics, utility types)",
+          "Strict type enforcement in large codebases",
+          "API contract typing for reliability",
+          "Reusable and scalable type systems",
         ],
       },
       {
         name: "JavaScript",
         icon: Braces,
         capabilities: [
-          "ES6+ modern JavaScript patterns",
-          "Closures and scope management",
-          "Async programming (Promises / async-await)",
-          "Event loop understanding",
-          "Functional programming concepts",
+          "Deep understanding of closures and execution context",
+          "Asynchronous programming (Promises, async/await)",
+          "Event loop and non-blocking behavior",
+          "Functional programming patterns",
+          "Modern ES6+ features in production systems",
         ],
       },
     ],
   },
   {
     title: "Architecture",
-    description: "Scalable patterns for complex systems",
+    description: "Designing scalable frontend systems and patterns",
     skills: [
       {
         name: "Micro Frontend Architecture",
         icon: LayoutGrid,
         capabilities: [
-          "Webpack Module Federation",
-          "Independent module deployments",
-          "Shared dependency management",
-          "Cross-module communication",
-          "Scalable UI architecture",
+          "Webpack Module Federation for modular systems",
+          "Independent deployments across teams",
+          "Shared dependency management strategies",
+          "Cross-module communication patterns",
+          "Scalable UI architecture for large applications",
         ],
       },
       {
         name: "State Management",
         icon: Layers,
         capabilities: [
-          "MobX store architecture",
-          "Global vs local state handling",
-          "Server state management with React Query",
-          "Derived state optimization",
-          "State normalization",
+          "MobX store design for scalable state handling",
+          "Separation of server state and UI state",
+          "React Query for async data management",
+          "Derived state optimization techniques",
+          "State normalization for large datasets",
         ],
       },
       {
         name: "Design Systems",
         icon: Component,
         capabilities: [
-          "Reusable UI component architecture",
-          "Design tokens and theming",
-          "Component abstraction patterns",
-          "Storybook documentation",
-          "Consistent UI standards",
+          "Reusable component architecture",
+          "Design tokens and theming strategies",
+          "Consistent UI patterns across applications",
+          "Storybook-based documentation",
+          "Scalable component abstraction",
         ],
       },
       {
         name: "Performance Optimization",
         icon: Zap,
         capabilities: [
-          "Code splitting",
-          "Lazy loading",
+          "Code splitting and lazy loading strategies",
           "Bundle size optimization",
-          "Lighthouse performance tuning",
-          "Memoization techniques",
+          "Core Web Vitals improvement",
+          "SSR-based performance tuning",
+          "Memoization and rendering optimization",
         ],
       },
     ],
   },
   {
     title: "Engineering Quality",
-    description: "Practices that ensure reliability and maintainability",
+    description: "Ensuring reliability, maintainability, and scalability",
     skills: [
       {
         name: "Testing",
         icon: TestTube,
         capabilities: [
-          "Unit testing with Jest",
+          "Unit testing using Jest",
           "Component testing with React Testing Library",
-          "Mocking APIs",
-          "Test coverage monitoring",
-          "Snapshot testing",
+          "Mocking APIs and external services",
+          "Maintaining high test coverage (90%+)",
+          "Regression prevention strategies",
         ],
       },
       {
         name: "Storybook",
         icon: BookOpen,
         capabilities: [
-          "Component documentation",
-          "UI isolation testing",
-          "Visual regression validation",
-          "Reusable component catalog",
+          "Component documentation and isolation",
+          "Visual testing of UI components",
+          "Reusable component cataloging",
+          "Improving developer collaboration",
         ],
       },
       {
         name: "Code Quality",
         icon: ShieldCheck,
         capabilities: [
-          "ESLint + Prettier configuration",
-          "Code review practices",
+          "ESLint and Prettier standardization",
+          "Code review best practices",
           "Static code analysis",
-          "SonarQube quality checks",
+          "Maintaining clean and scalable codebases",
         ],
       },
       {
@@ -161,15 +159,14 @@ const skillGroups: SkillGroup[] = [
         icon: Activity,
         capabilities: [
           "Frontend performance monitoring",
-          "Error tracking and debugging",
-          "User analytics integration",
+          "Error tracking and debugging workflows",
+          "User behavior analytics integration",
           "Runtime performance analysis",
         ],
       },
     ],
   },
 ];
-
 const SkillCapabilities = ({ skill, delay }: { skill: Skill; delay: number }) => (
   <motion.div
     initial={{ opacity: 0, x: -10 }}
