@@ -16,6 +16,8 @@
     "noImplicitAny": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "baseUrl": ".",
+    "esModuleInterop": true,
     "paths": {
       "@/*": [
         "./src/*"
@@ -25,7 +27,8 @@
     "strict": false,
     "target": "ES2020",
     "types": [
-      "vitest/globals"
+      "jest",
+      "node"
     ],
     "useDefineForClassFields": true
   },

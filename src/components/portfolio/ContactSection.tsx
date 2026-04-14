@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { env } from "@/config/env";
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -19,22 +19,25 @@ const ContactSection = () => {
     setStatus("loading");
 
     try {
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-      
+      const { supabaseUrl, supabasePublishableKey } = env;
+
+      if (!supabaseUrl || !supabasePublishableKey) {
+        throw new Error("Supabase environment variables are missing.");
+      }
+
       const response = await fetch(`${supabaseUrl}/functions/v1/send-contact-email`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${supabaseKey}`,
-          'apikey': supabaseKey,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${supabasePublishableKey}`,
+          apikey: supabasePublishableKey,
         },
         body: JSON.stringify({ name: form.name.trim(), email: form.email.trim(), message: form.message.trim() }),
       });
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Failed to send');
+        throw new Error(errorData.error || "Failed to send");
       }
 
       setStatus("success");
