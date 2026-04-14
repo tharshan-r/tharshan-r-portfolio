@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { useContact } from "@/features/contact/hooks";
 import { toast } from "sonner";
 import { env } from "@/config/env";
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const contactMutation = useContact();
+
+  useEffect(() => {
+    if (contactMutation.isSuccess) {
+      setForm({ name: "", email: "", message: "" });
+      toast.success("Message sent successfully!");
+    } else if (contactMutation.isError) {
+      toast.error("Failed to send message. Please try again.");
+    }
+  }, [contactMutation.isSuccess, contactMutation.isError]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,39 +26,11 @@ const ContactSection = () => {
       return;
     }
 
-    setStatus("loading");
-
-    try {
-      const { supabaseUrl, supabasePublishableKey } = env;
-
-      if (!supabaseUrl || !supabasePublishableKey) {
-        throw new Error("Supabase environment variables are missing.");
-      }
-
-      const response = await fetch(`${supabaseUrl}/functions/v1/send-contact-email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${supabasePublishableKey}`,
-          apikey: supabasePublishableKey,
-        },
-        body: JSON.stringify({ name: form.name.trim(), email: form.email.trim(), message: form.message.trim() }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || "Failed to send");
-      }
-
-      setStatus("success");
-      setForm({ name: "", email: "", message: "" });
-      toast.success("Message sent successfully!");
-      setTimeout(() => setStatus("idle"), 3000);
-    } catch {
-      setStatus("error");
-      toast.error("Failed to send message. Please try again.");
-      setTimeout(() => setStatus("idle"), 3000);
-    }
+    contactMutation.mutate({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      message: form.message.trim(),
+    });
   };
 
   return (
@@ -113,7 +95,7 @@ const ContactSection = () => {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
-              disabled={status === "loading"}
+              disabled={contactMutation.isPending}
               maxLength={100}
               required
             />
@@ -123,7 +105,7 @@ const ContactSection = () => {
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
-              disabled={status === "loading"}
+              disabled={contactMutation.isPending}
               maxLength={255}
               required
             />
@@ -133,20 +115,19 @@ const ContactSection = () => {
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               rows={4}
               className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary resize-none"
-              disabled={status === "loading"}
+              disabled={contactMutation.isPending}
               maxLength={1000}
               required
             />
             <button
               type="submit"
-              disabled={status === "loading" || status === "success"}
+              disabled={contactMutation.isPending || contactMutation.isSuccess}
               className="w-full inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
             >
-              {status === "loading" && <Loader2 size={14} className="animate-spin" />}
-              {status === "success" && <CheckCircle size={14} />}
-              {status === "error" && <AlertCircle size={14} />}
-              {status === "idle" && <Send size={14} />}
-              {status === "loading" ? "Sending..." : status === "success" ? "Sent!" : "Send Message"}
+              {contactMutation.isPending && <Loader2 size={14} className="animate-spin" />}
+              {contactMutation.isSuccess && <CheckCircle size={14} />}
+              {contactMutation.isError && <AlertCircle size={14} />}
+              {contactMutation.isPending ? "Sending..." : contactMutation.isSuccess ? "Sent!" : "Send Message"}
             </button>
           </motion.form>
         </div>

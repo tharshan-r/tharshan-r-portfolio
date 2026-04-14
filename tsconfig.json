@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "baseUrl": ".",
-    "esModuleInterop": true,
-    "noImplicitAny": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "paths": {
       "@/*": [
         "./src/*"
       ]
     },
     "skipLibCheck": true,
-    "strictNullChecks": false
+    "strict": true,
+    "strictNullChecks": true,
+    "moduleResolution": "bundler",
+    "target": "ESNext"
   },
   "files": [],
   "references": [

@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useEngineeringMode } from "@/hooks/use-engineering-mode";
-
+// import { DesignModeSkillSection } from "@/features/portfolio/SkillsGalaxy";
 interface Skill {
   name: string;
   icon: LucideIcon;
@@ -277,6 +277,7 @@ const SkillsSection = () => {
                         );
                       })}
                     </motion.div>
+                    // <DesignModeSkillSection group={group}/>
                   )}
                 </AnimatePresence>
               </div>
