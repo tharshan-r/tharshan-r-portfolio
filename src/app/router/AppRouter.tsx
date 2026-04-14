@@ -14,7 +14,7 @@ const PageLoader = () => (
 
 export const AppRouter: React.FC = () => {
   return (
-    <Router>
+    <Router basename="/tharshan-r-portfolio/">
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<Index />} />
