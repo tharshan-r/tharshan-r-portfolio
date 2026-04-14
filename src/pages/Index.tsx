@@ -24,7 +24,7 @@ const Index = () => {
       window.history.replaceState(null, "", window.location.pathname + window.location.search);
     }
     window.scrollTo(0, 0);
-  }, []);
+  }, [location.hash, location.pathname, location.search]);
   return (
     <div className="min-h-screen bg-background grid-bg">
       <ScrollProgress />
